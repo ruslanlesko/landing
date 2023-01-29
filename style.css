@@ -1,7 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('/NotoSans-Regular.ttf');
+}
 
 body {
-	background-color: black;
+	background-color: #212121;
 	color: beige;
 	font-family: 'Noto Sans', sans-serif;
 	font-weight: 400;
@@ -114,11 +117,11 @@ a:active {
 
 @media (not (prefers-color-scheme: dark)) {
 	body {
-		background-color: beige;
-		color: black;
+		background-color: #FFF3E0;
+		color: #212121;
 	}
 
 	.social svg {
-		fill: black;
+		fill: #212121;
 	}
 }
