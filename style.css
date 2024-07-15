@@ -1,6 +1,7 @@
 @font-face {
     font-family: 'Noto Sans';
     src: url('/NotoSans-Regular.ttf');
+	font-display: swap;
 }
 
 body {
@@ -74,7 +75,8 @@ li {
 }
 
 a {
-	color: #6a8eb8;
+	color: #3C21B0;
+	font-weight: bolder;
 }
 
 a:link {
