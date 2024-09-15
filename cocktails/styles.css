@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: serif;
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+}
+
+.menu-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.menu-title {
+    font-family: "DM Serif Display", sans-serif;
+    text-align: center;
+    font-size: 2.5em;
+    letter-spacing: 2px;
+    color: #ffb74d;
+}
+
+.menu-subtitle {
+    font-family: "Playfair Display", serif;
+    text-align: center;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.cocktail {
+    font-family: "Playfair Display", serif;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #333;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cocktail:hover {
+    background-color: #444;
+}
+
+.cocktail img {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.cocktail-info {
+    flex: 1;
+}
+
+.cocktail-name {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.cocktail-subtitle {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #ffb74d;
+}
+
+.ingredients {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.ingredients ul {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.ingredients ul li {
+    font-size: 1em;
+    padding: 3px 0;
+    font-style: italic;
+}
+
+/* Separator */
+.cocktail-name::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #555;
+    margin-top: 10px;
+}
+
+footer {
+    font-family: "DM Serif Display", serif;
+    text-align: center;
+    padding: 20px 0;
+    color: #f0f0f0;
+    font-size: 1em;
+    letter-spacing: 1px;
+}
+
+footer p {
+    margin: 0;
+}

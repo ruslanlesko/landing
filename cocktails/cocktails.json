@@ -1,0 +1,93 @@
+[
+    {
+        "title": "Margarita / Маргарита",
+        "kind": "Sour / Кислий",
+        "imageUrl": "https://www.liquor.com/thmb/-N7feQvWwknpijq3P8Rg5cH9pOg=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/margarita-720x720-primary-f4a3b044e9a746d9b88890515c3a7328.jpg",
+        "ingredients": [
+            "Tequila / Текіла",
+            "Cointreau Orange Liqueur / Апельсиновий Лікер Cointreau",
+            "Fresh Lime Juice / Лаймовий Фреш"
+        ]
+    },
+    {
+        "title": "Cosmopolitan / Космополіт",
+        "kind": "Sour / Кислий",
+        "imageUrl": "https://www.liquor.com/thmb/Oql_nKuH6HARtKQNukhTxQ5SHkc=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/cosmopolitan-720x720-primary-0190d40114c741648979dae7e46b6bbf.jpg",
+        "ingredients": [
+            "Lemon Vodka / Лимонна Горілка",
+            "Cointreau Orange Liqueur / Апельсиновий Лікер Cointreau",
+            "Fresh Lime Juice / Лаймовий Фреш",
+            "Cranberry Juice / Журавлиний Сік"
+        ]
+    },
+    {
+        "title": "Negroni / Негроні",
+        "kind": "Bitter / Гіркий",
+        "imageUrl": "https://www.liquor.com/thmb/k8ttXrtSclkRyKeeXK7VZaM8izU=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/negroni-720x720-primary-535dee7b50914af1810b1927b69dbe46.jpg",
+        "ingredients": [
+            "Gin / Джин",
+            "Vermouth / Вермут",
+            "Campari Bitter / Кампарі Біттер"
+        ]
+    },
+    {
+        "title": "Boulevardier / Булівардʼє",
+        "kind": "Bitter / Гіркий",
+        "imageUrl": "https://www.liquor.com/thmb/EGfUHMtXb28tLy3q05Rg2-S_5Lw=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__liquor__2019__09__12094720__Boulevardier-720x720-recipe-53da547e8cfc4bd79a393ac99891f5ba.jpg",
+        "ingredients": [
+            "Bourbon / Бурбон",
+            "Vermouth / Вермут",
+            "Campari / Кампарі"
+        ]
+    },
+    {
+        "title": "Old Fashioned / Старомодний",
+        "kind": "Strong / Міцний",
+        "imageUrl": "https://www.liquor.com/thmb/4BmEm2GBiayU6Zh4tZXd_q6Z2u4=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__liquor__2019__03__15150630__bourbon-old-fashioned-720x720-article-6e08b64e905442b781e6b70f6e28ffb4.jpg",
+        "ingredients": [
+            "Whiskey / Віскі",
+            "Angostura Bitters / Ангустура Біттер",
+            "Sugar / Цукор"
+        ]
+    },
+    {
+        "title": "Tequila Sunrise / Ранок з Текілою",
+        "kind": "Sweet / Солодкий",
+        "imageUrl": "https://www.liquor.com/thmb/rMKWcpnMlrGTuNE35fpgkDzoKVk=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/tequila-sunrise-1500x1500-hero-eeae10efeb134a3e9d5a3852b1b6e7dc.jpg",
+        "ingredients": [
+            "Tequila / Текіла",
+            "Orange Juice / Апельсиновий Сік",
+            "Grenadine Syrop / Сироп Гренадін"
+        ]
+    },
+    {
+        "title": "Tom Collins / Старий Том",
+        "kind": "Sweet / Солодкий",
+        "imageUrl": "https://www.liquor.com/thmb/nwmEuUIN8cf_Pbjs9kK7lpf6GSk=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/LQR-tomcollins-original-4000x4000-680e282529a34b30ac4b8ed495168109.jpg",
+        "ingredients": [
+            "Gin / Джин",
+            "Fresh Lemon Juice / Лимонний Фреш",
+            "Simple Syrup / Цукровий Сироп",
+            "Sparkling Water / Газована Вода"
+        ]
+    },
+    {
+        "title": "Gin & Tonic / Джин-Тонік",
+        "kind": "Herbal / Травʼяний",
+        "imageUrl": "https://www.liquor.com/thmb/ssJHAz7eCG7Sn7WLz1LvOEHkD1U=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__liquor__2019__09__18090535__Gin-and-Tonic-720x720-recipe-c2e32c4cf53c4ed7a4de20af8e862a12.jpg",
+        "ingredients": [
+            "Gin / Джин",
+            "Tonic / Тонік"
+        ]
+    },
+    {
+        "title": "Patriotic / Патріотичний",
+        "kind": "Sweet / Солодкий",
+        "imageUrl": "patriotic.jpg",
+        "ingredients": [
+            "Blue Curacao Liqueur / Лікер Blue Coracao",
+            "Orange Juice / Апельсиновий Сік",
+            "Simple Syrup / Цукровий Сироп"
+        ]
+    }
+]
