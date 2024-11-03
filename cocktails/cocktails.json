@@ -21,6 +21,16 @@
         ]
     },
     {
+        "title": "Manhattan / Манхетен",
+        "kind": "Strong / Міцний",
+        "imageUrl": "https://www.liquor.com/thmb/IgOYvOZoSBPAzm9TjRfCtUD2wcg=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/manhattan-4000x4000-primary-ig-9c3d894510284e9d8fbd9c518d00790b.jpg",
+        "ingredients": [
+            "Bourbon / Бурбон",
+            "Vermouth / Вермут",
+            "Angostura Bitters / Ангустура Біттер"
+        ]
+    },
+    {
         "title": "Negroni / Негроні",
         "kind": "Bitter / Гіркий",
         "imageUrl": "https://www.liquor.com/thmb/k8ttXrtSclkRyKeeXK7VZaM8izU=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/negroni-720x720-primary-535dee7b50914af1810b1927b69dbe46.jpg",
@@ -78,6 +88,16 @@
         "ingredients": [
             "Gin / Джин",
             "Tonic / Тонік"
+        ]
+    },
+    {
+        "title": "Daiquiri / Дайкірі",
+        "kind": "Sweet / Солодкий",
+        "imageUrl": "https://www.liquor.com/thmb/60kax5NXq_tMlbL9thPTwOcG7y8=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/Daiquiri_3000x3000_primary-206eb2330cb04852ab7d780dcf3d55ef.jpg",
+        "ingredients": [
+            "White Rum / Білий Ром",
+            "Fresh Lime Juice / Лаймовий Фреш",
+            "Simple Syrup / Цукровий Сироп"
         ]
     },
     {
