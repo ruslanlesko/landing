@@ -102,6 +102,18 @@
         ]
     },
     {
+        "title": "Mojito / Мохіто",
+        "kind": "Sweet / Солодкий",
+        "imageUrl": "https://www.liquor.com/thmb/Bgx5Mv8rce6HSOFExQnfQVBzJHE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/mojito-720x720-primary-6a57f80e200c412e9a77a1687f312ff7.jpg",
+        "ingredients": [
+            "White Rum / Білий Ром",
+            "Fresh Lime Juice / Лаймовий Фреш",
+            "Mint Leaves / Листя М'яти",
+            "Simple Syrup / Цукровий Сироп",
+            "Sparkling Water / Газована Вода"
+        ]
+    },
+    {
         "title": "Daiquiri / Дайкірі",
         "kind": "Sweet / Солодкий",
         "imageUrl": "https://www.liquor.com/thmb/60kax5NXq_tMlbL9thPTwOcG7y8=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/Daiquiri_3000x3000_primary-206eb2330cb04852ab7d780dcf3d55ef.jpg",
