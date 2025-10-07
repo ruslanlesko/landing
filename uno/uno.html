@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNO Score Keeper</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Bebas Neue', sans-serif;
+            background: #0d0d0d;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+            position: relative;
+        }
+
+        .scoreboard {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 30px 30px 30px;
+            gap: 20px;
+            overflow-y: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .player-card {
+            background: #1a1a1a;
+            border: 3px solid #fff;
+            border-radius: 0;
+            padding: 30px;
+            min-width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .player-card.animating {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(2.5);
+            z-index: 1000;
+            background: #000;
+        }
+
+        .player-name {
+            font-size: 3em;
+            font-weight: normal;
+            color: #fff;
+            margin-bottom: 15px;
+            letter-spacing: 4px;
+        }
+
+        .player-score {
+            font-size: 5em;
+            font-weight: normal;
+            color: #fff;
+            letter-spacing: 8px;
+            position: relative;
+            overflow: hidden;
+            height: 1.2em;
+        }
+
+        .score-digit {
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            height: 1.2em;
+            width: 0.7em;
+            vertical-align: top;
+        }
+
+        .digit-roller {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .digit-roller div {
+            height: 1.2em;
+            line-height: 1.2em;
+        }
+
+        .winner-banner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #000;
+            border: 5px solid #fff;
+            padding: 50px 80px;
+            border-radius: 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9);
+            text-align: center;
+            z-index: 1000;
+            display: none;
+            animation: bounceIn 0.6s;
+        }
+
+        .winner-banner.show {
+            display: block;
+        }
+
+        .winner-banner h2 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            color: #fff;
+            letter-spacing: 6px;
+        }
+
+        .winner-banner p {
+            font-size: 2.5em;
+            color: #fff;
+            letter-spacing: 4px;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: translate(-50%, -50%) scale(0.3);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .cli-container {
+            background: #000;
+            border-top: 1px solid #333;
+            padding: 5px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cli-output {
+            font-family: 'Courier New', monospace;
+            font-size: 0.6em;
+            color: #888;
+            margin-bottom: 3px;
+            min-height: 15px;
+            max-height: 25px;
+            overflow-y: auto;
+        }
+
+        .cli-output div {
+            margin: 0;
+        }
+
+        .cli-input-container {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .cli-prompt {
+            font-family: 'Courier New', monospace;
+            color: #888;
+            font-size: 0.7em;
+        }
+
+        .cli-input {
+            flex: 1;
+            background: #0d0d0d;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.65em;
+            border-radius: 0;
+            outline: none;
+        }
+
+        .cli-input:focus {
+            border-color: #666;
+        }
+
+        .help-text {
+            font-family: 'Courier New', monospace;
+            font-size: 0.5em;
+            color: #555;
+            margin-top: 3px;
+        }
+
+        .empty-state {
+            text-align: center;
+            font-size: 2em;
+            color: #fff;
+            opacity: 0.3;
+            letter-spacing: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="scoreboard" id="scoreboard">
+        <div class="empty-state">Type "add [name]" to add players</div>
+    </div>
+
+    <div class="winner-banner" id="winnerBanner">
+        <h2>🏆 Winner! 🏆</h2>
+        <p id="winnerName"></p>
+    </div>
+
+    <div class="cli-container">
+        <div class="cli-output" id="cliOutput"></div>
+        <div class="cli-input-container">
+            <span class="cli-prompt">></span>
+            <input type="text" class="cli-input" id="cliInput" placeholder="Enter command..." autocomplete="off">
+        </div>
+        <div class="help-text">
+            Commands: add [name] | remove [name] | score [name] [points] | clear | help
+        </div>
+    </div>
+
+    <script>
+        class UNOScoreKeeper {
+            constructor() {
+                this.players = [];
+                this.winner = null;
+                this.loadState();
+                this.render();
+            }
+
+            loadState() {
+                const saved = localStorage.getItem('unoScoreKeeper');
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    this.players = data.players || [];
+                    this.winner = data.winner || null;
+                }
+            }
+
+            saveState() {
+                localStorage.setItem('unoScoreKeeper', JSON.stringify({
+                    players: this.players,
+                    winner: this.winner
+                }));
+            }
+
+            addPlayer(name) {
+                if (!name || name.trim() === '') {
+                    return 'Error: Player name cannot be empty';
+                }
+                
+                if (this.players.find(p => p.name.toLowerCase() === name.toLowerCase())) {
+                    return `Error: Player "${name}" already exists`;
+                }
+
+                this.players.push({ name: name.trim(), score: 0 });
+                this.saveState();
+                this.render();
+                return `Added player: ${name}`;
+            }
+
+            removePlayer(name) {
+                const index = this.players.findIndex(p => p.name.toLowerCase() === name.toLowerCase());
+                if (index === -1) {
+                    return `Error: Player "${name}" not found`;
+                }
+
+                this.players.splice(index, 1);
+                this.saveState();
+                this.render();
+                return `Removed player: ${name}`;
+            }
+
+            updateScore(name, points) {
+                const player = this.players.find(p => p.name.toLowerCase() === name.toLowerCase());
+                if (!player) {
+                    return `Error: Player "${name}" not found`;
+                }
+
+                const pointsNum = parseInt(points);
+                if (isNaN(pointsNum)) {
+                    return 'Error: Points must be a number';
+                }
+
+                const oldScore = player.score;
+                player.score += pointsNum;
+                
+                // Trigger animation
+                this.animateScoreChange(player.name, oldScore, player.score);
+
+                if (player.score >= 500 && !this.winner) {
+                    this.winner = player.name;
+                    setTimeout(() => this.showWinner(player.name), 2000);
+                }
+
+                this.saveState();
+                return `${player.name}: ${oldScore} → ${player.score}`;
+            }
+
+            animateScoreChange(playerName, oldScore, newScore) {
+                const cards = document.querySelectorAll('.player-card');
+                let targetCard = null;
+                
+                cards.forEach(card => {
+                    const nameEl = card.querySelector('.player-name');
+                    if (nameEl && nameEl.textContent === playerName) {
+                        targetCard = card;
+                    }
+                });
+
+                if (!targetCard) return;
+
+                // Add animating class
+                targetCard.classList.add('animating');
+                
+                // Create slot machine rolling effect
+                const scoreEl = targetCard.querySelector('.player-score');
+                const oldDigits = oldScore.toString().split('');
+                const newDigits = newScore.toString().split('');
+                
+                // Pad with zeros if needed
+                const maxLength = Math.max(oldDigits.length, newDigits.length);
+                while (oldDigits.length < maxLength) oldDigits.unshift('0');
+                while (newDigits.length < maxLength) newDigits.unshift('0');
+                
+                // Create roller HTML
+                let rollerHTML = '';
+                for (let i = 0; i < maxLength; i++) {
+                    const startDigit = parseInt(oldDigits[i]);
+                    const endDigit = parseInt(newDigits[i]);
+                    
+                    let digitSequence = '';
+                    // Create rolling sequence (show all digits from start to end)
+                    for (let d = 0; d <= 9; d++) {
+                        digitSequence += `<div>${d}</div>`;
+                    }
+                    // Add extra cycles for visual effect
+                    for (let d = 0; d <= endDigit; d++) {
+                        digitSequence += `<div>${d}</div>`;
+                    }
+                    
+                    rollerHTML += `
+                        <span class="score-digit">
+                            <div class="digit-roller" data-start="${startDigit}" data-end="${endDigit}">
+                                ${digitSequence}
+                            </div>
+                        </span>
+                    `;
+                }
+                
+                scoreEl.innerHTML = rollerHTML;
+                
+                // Trigger animation
+                setTimeout(() => {
+                    const rollers = scoreEl.querySelectorAll('.digit-roller');
+                    rollers.forEach((roller, index) => {
+                        const endDigit = parseInt(newDigits[index]);
+                        const offset = (10 + endDigit) * -1.2;
+                        roller.style.transform = `translateY(${offset}em)`;
+                    });
+                }, 50);
+
+                // Return to original position after 5 seconds
+                setTimeout(() => {
+                    targetCard.classList.remove('animating');
+                    this.render();
+                }, 6500);
+            }
+
+            clear() {
+                this.players = [];
+                this.winner = null;
+                this.saveState();
+                this.render();
+                document.getElementById('winnerBanner').classList.remove('show');
+                return 'Cleared all players and scores';
+            }
+
+            showWinner(name) {
+                const banner = document.getElementById('winnerBanner');
+                const winnerName = document.getElementById('winnerName');
+                winnerName.textContent = `${name} wins with ${this.players.find(p => p.name === name).score} points!`;
+                banner.classList.add('show');
+            }
+
+            render() {
+                const scoreboard = document.getElementById('scoreboard');
+                
+                if (this.players.length === 0) {
+                    scoreboard.innerHTML = '<div class="empty-state">Type "add [name]" to add players</div>';
+                    return;
+                }
+
+                scoreboard.innerHTML = this.players.map(player => `
+                    <div class="player-card">
+                        <div class="player-name">${player.name}</div>
+                        <div class="player-score">${player.score}</div>
+                    </div>
+                `).join('');
+            }
+
+            getHelp() {
+                return `Available commands:
+  add [name] - Add a new player
+  remove [name] - Remove a player
+  score [name] [points] - Add points to player's score
+  clear - Remove all players and reset game
+  help - Show this help message`;
+            }
+        }
+
+        const game = new UNOScoreKeeper();
+        const cliInput = document.getElementById('cliInput');
+        const cliOutput = document.getElementById('cliOutput');
+
+        function addOutput(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            cliOutput.appendChild(div);
+            cliOutput.scrollTop = cliOutput.scrollHeight;
+        }
+
+        function processCommand(input) {
+            const parts = input.trim().split(/\s+/);
+            const command = parts[0].toLowerCase();
+            
+            let result;
+            
+            switch(command) {
+                case 'add':
+                    result = game.addPlayer(parts.slice(1).join(' '));
+                    break;
+                case 'remove':
+                    result = game.removePlayer(parts.slice(1).join(' '));
+                    break;
+                case 'score':
+                    if (parts.length < 3) {
+                        result = 'Error: Usage: score [name] [points]';
+                    } else {
+                        const points = parts[parts.length - 1];
+                        const name = parts.slice(1, -1).join(' ');
+                        result = game.updateScore(name, points);
+                    }
+                    break;
+                case 'clear':
+                    result = game.clear();
+                    break;
+                case 'help':
+                    result = game.getHelp();
+                    break;
+                default:
+                    result = `Unknown command: ${command}. Type "help" for available commands.`;
+            }
+
+            addOutput(`> ${input}`);
+            addOutput(result);
+        }
+
+        cliInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const input = cliInput.value.trim();
+                if (input) {
+                    processCommand(input);
+                    cliInput.value = '';
+                }
+            }
+        });
+
+        // Initial help message
+        addOutput('UNO Score Keeper CLI - Type "help" for commands');
+    </script>
+</body>
+</html>
